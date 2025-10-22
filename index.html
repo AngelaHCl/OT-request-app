@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <div id="loginSection">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="paynumber">Paynumber:</label><br>
+            <input type="text" id="paynumber" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" required><br><br>
+
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginMessage"></div>
+    </div>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>Overtime Request App</title>
+    </head>
+    <body>
+        <h2>Overtime Request</h2>
+
+        <label for="overtimeType">Type of Overtime:</label><br>
+        <select id="overtimeType" required>
+            <option value="">-- Select Type --</option>
+            <option value="Pre Shift">Pre Shift</option>
+            <option value="Post Shift">Post Shift</option>
+            <option value="RDO">RDO</option>
+            </select><br><br>
+
+
+        <label for="shiftType">Shift Type:</label><br>
+        <select id="shiftType" required>
+            <option value="">-- Select Shift --</option>
+            <option value="Days">Days</option>
+            <option value="Nights">Nights</option>
+        </select><br><br>
+
+label for="shiftTime">Shift Time:</label><br>
+        <select id="shiftTime" required>
+            <option value="">-- Select Shift Time --</option>
+            <option value="08:00 - 16:00"</option>
+            <option value="08:00 - 09:00"</option>
+            <option value="16:00 - 03:10"</option>
+            <option value="16:00 - 19:00"</option>
+            <option value="17:00 - 03:10"</option>
+            <option value="17:00 - 19:30"</option>
+        </select><br><br>
+
+<div id="rdoStartTimeGroup" style="display: none;">
+            <label for="rdoStartTime">RDO Start Time:</label><br>
+            <select id="rdoStartTime">
+                <option value="">-- Select RDO Start Time --</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:30">19:30</option>
+            </select><br><br>
+</div>
+
+        <form if="overtimeForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" required><br><br>
+
+            <label for="date">Date of Overtime:</label><br>
+            <input type="date" id="date" required><br><br>
+
+            <label for="startDate">Start Date:</label><br>
+            <input type="date" id="startDate" required><br><br>
+
+            <label for="endDate">End Date:</label><br>
+            <input type="date" id="endDate" required><br><br>
+
+            <label for="start">Start Time:</label><br>
+            <input type="time" id="end" required><br><br>
+
+            <label for="type">Type</label><br>
+            <textarea id="type" rows="1" cols="10" required></textarea><br><br>
+
+            <button type="submit">Submit Request</button>
+        </form>
+
+        <div id="output"></div>
+
+        <script src="script.js"></script>
+    </body>
+
+    <button onclick="exportToCSV()">Export to Excel</button>
+
+    <div id="planningSection" style="display:none;">
+        <h2>Planning Dashboard</h2>
+        <button onclick="confirmAction('approve', index)">Approve</button>
+        <button onclick="confirmAction('reject', index)">Reject</button>
+    </div>
+
+<div id="pagination"></div>
+
+
+<div id="filterControls">
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+
+    <label for="shiftFilter">Filter by Shift Type:</label>
+    <select id="shiftFilter">
+        <option value="All">All</option>
+        <option value="Days">Days</option>
+        <option value="Nights">Nights</option>
+    </select>
+
+    <label for="dateFilter">Start Date</label>
+    <input type="date" id="dateFilter">
+
+    <label for="otTypeFilter">Filter by OT Type:</label>
+    <select id="otTypeFilter">
+        <option value="All">All Types</option>
+        <option value="Pre Shift">Pre Shift</option>
+        <option value="Post Shift">Post Shift</option>
+        <option value="RDO">RDO</option>
+    </select><br><br>
+
+    <button id="resetFilter">Reset Filter</button><br><br>
+
+    <button onclick="renderDashboard()">Apply Filters</button>
+</div>
+
+<div class="dashboard-container">
+    <div class="filters">
+        <!-- All filters dropdown -->
+    </div>
+    <div class="table-wrapper">
+        <!-- Request table -->
+    </div>
+</div>
+
+<button onclick="exportApproved()">Export Approved Requests</button>
+
+<div id="summaryCounts" style="margin-bottom: 20px;">
+    <strong>Summary:</strong><br>
+    <span id="totalCount">Total Requests: 0</span><br>
+    <span id="approvedCount">Approved: 0</span><br>
+    <span id="rejectedCount">Rejected: 0</span>
+</div>
+
+<label for="searchInput">Search by Pay Number or Name:</label>
+<input type="text" id="searchInput" placeholder="Enter Pay Number or Name">
+<button onclick="renderDashboard()">Search</button>
+
+    <div id="planningDashboard" style="display:none;">
+        <h3>All Overtime Requests</h3>
+        <table id="requestsTable">
+            <thead>
+                <tr>
+                    <th>Pay Number</th>
+                    <th>startDate</th>
+                    <th>endDate</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Type</th>
+                    <th>Shift Type</th>
+                    <th>Shift Time</th>
+                    <th>Type of Overtime</th>
+                    <th>rdo Start Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+    </div>
+</html>
